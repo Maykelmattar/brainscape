@@ -1,706 +1,1182 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainscape - Premium Escape Rooms Lebanon</title>
+    <meta name="description" content="Experience the thrill of the best escape room in Lebanon! Dive into immersive adventures.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <head>
+    <style>
+        :root {
+            --bg-color: #030303;
+            --surface-color: #0a0a0a;
+            --surface-color-light: #151515;
+            --accent-color: #e50914; /* Premium red */
+            --accent-hover: #f40612;
+            --text-main: #f5f5f5;
+            --text-muted: #b3b3b3;
+            --font-heading: 'Barlow Condensed', sans-serif;
+            --font-body: 'Barlow', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    <meta charset="utf-8">
-    <meta name="author" content="Maykel Mattar">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Experience the thrill of the best escape room in Lebanon! Dive into immersive adventures with themes like Breaking Bad, Money Heist, Prison Break, and Haunted House. Perfect for thrill-seekers and team-building. Book your escape today!">
-    <meta name="keywords" content="Escape Room Lebanon, Breaking Bad Escape Room, Money Heist Game, Prison Break Experience, Haunted House Adventure, Team Building Activities Lebanon, Best Escape Room Themes, Thrilling Escape Games, Mystery Solving Games, Real-Life Escape Rooms Lebanon">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <title>Brainscape</title>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-liberty-market.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-  </head>
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+        }
 
+        .navbar.scrolled {
+            background: rgba(3, 3, 3, 0.95);
+            padding: 1rem 5%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-brand img {
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.2));
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-brand:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            background: transparent;
+            padding: 0.6rem 1.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            transition: var(--transition);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .nav-contact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 100%;
+            background: var(--accent-color);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-contact:hover {
+            color: #fff;
+        }
+        
+        .nav-contact:hover::before {
+            width: 100%;
+        }
+
+        .nav-contact i {
+            transition: var(--transition);
+        }
+        
+        .nav-contact:hover i {
+            color: #fff;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            background: url('assets/images/ban2.jpg') center/cover no-repeat fixed;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(3,3,3,0.1) 0%, rgba(3,3,3,0.6) 100%),
+                        linear-gradient(to bottom, rgba(3,3,3,0.3) 0%, rgba(3,3,3,0.8) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: fadeInUP 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUP {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: block;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            font-weight: 800;
+        }
+
+        .hero-title span {
+            color: var(--accent-color);
+        }
+
+        .hero-desc {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 1.2rem 3.5rem;
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.6);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        /* --- Rooms Section --- */
+        .rooms {
+            padding: 8rem 5%;
+            background: var(--bg-color);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .section-header p {
+            font-family: var(--font-heading);
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.8rem 2rem;
+            border-radius: 2px;
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            color: #fff;
+            border-color: var(--accent-color);
+            background: rgba(229, 9, 20, 0.1);
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.2);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .room-card {
+            background: var(--surface-color);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .room-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            border-color: rgba(229, 9, 20, 0.3);
+        }
+
+        .room-img-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .room-img {
+            height: 280px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+            filter: grayscale(20%) contrast(110%);
+        }
+        
+        .room-card:hover .room-img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(120%);
+        }
+        
+        .room-img-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0) 60%);
+            z-index: 1;
+        }
+
+        .room-location {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 10;
+        }
+        
+        .room-location i {
+            color: var(--accent-color);
+        }
+
+        .room-info {
+            padding: 2.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+            background: var(--surface-color);
+            margin-top: -40px;
+        }
+
+        .room-title {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+            line-height: 1.1;
+        }
+        
+        .room-card:hover .room-title {
+            color: var(--accent-color);
+        }
+
+        .room-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .stat i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .room-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+
+        .room-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .difficulty {
+            display: flex;
+            gap: 0.3rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            padding: 0.8rem 1.8rem;
+            border: 1px solid var(--accent-color);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            border-radius: 2px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 100%;
+            background: var(--accent-color);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn-outline:hover {
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
+        }
+        
+        .btn-outline:hover::before {
+            width: 100%;
+        }
+
+        /* --- Stats Section --- */
+        .stats-section {
+            padding: 8rem 5%;
+            background: url('assets/images/bg-pattern.png'), var(--surface-color-light);
+            border-top: 1px solid rgba(255,255,255,0.02);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item h3 {
+            font-size: 5rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            text-shadow: 0 5px 15px rgba(229, 9, 20, 0.2);
+        }
+
+        .stat-item p {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-item span {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            display: block;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        /* --- Map Section --- */
+        .map-section {
+            padding: 8rem 5%;
+            background: var(--bg-color);
+        }
+
+        .map-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* custom scrollbar for reviews */
+        .reviews-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .reviews-list::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.02);
+        }
+        .reviews-list::-webkit-scrollbar-thumb {
+            background: rgba(229, 9, 20, 0.3);
+            border-radius: 4px;
+        }
+        .reviews-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(229, 9, 20, 0.6);
+        }
+
+        .review-card {
+            background: var(--surface-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .review-card:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .review-author {
+            font-size: 1.2rem;
+            font-family: var(--font-heading);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .review-author i {
+            color: var(--accent-color);
+        }
+
+        .review-stars {
+            color: #f5c518;
+            font-size: 0.9rem;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-style: italic;
+        }
+        
+        #map {
+            width: 100%;
+            height: 500px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+        @media (max-width: 992px) {
+            .map-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 6rem 5% 2rem;
+            background: #000;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        
+        .footer-brand img {
+            height: 60px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.1));
+        }
+        
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 400px;
+        }
+
+        .footer h4 {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px; left: 0; width: 40px; height: 2px;
+            background: var(--accent-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links a i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        .socials {
+            display: flex;
+            gap: 1.2rem;
+        }
+        
+        .socials a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            color: #fff;
+            border: 1px solid transparent;
+        }
+        
+        .socials a:hover {
+            background: rgba(229, 9, 20, 0.1);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.2);
+        }
+
+        @media (max-width: 992px) {
+            .hero-title { font-size: 4.5rem; }
+            .stats-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .nav-links { display: none; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .rooms-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+            .hero-subtitle { font-size: 1.1rem; }
+        }
+    </style>
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </div>
-  <!-- ***** Preloader End ***** -->
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="assets/images/logo.png" alt="Brainscape">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="https://wa.me/+96181183892">Book Now</a></li>
+        </ul>
+        <a href="https://wa.me/+96181183892" class="nav-contact">
+            <i class="fab fa-whatsapp"></i> +961 81 183 892
+        </a>
+    </nav>
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="Brainscape">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="https://wa.me/+96181183892">Book Now </a></li>
-                    </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">The Immersive Escape Room Experience</span>
+            <h1 class="hero-title">Can you escape before time runs out?</h1>
+            <p class="hero-desc">Enter a world of mystery, unravel complex puzzles, and race against the clock in Lebanon's most thrilling escape rooms.</p>
+            <a href="#rooms" class="btn-primary">Choose Your Challenge</a>
         </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+    </section>
 
-  <!-- ***** Main Banner Area Start ***** -->
-  <div class="main-banner " style="background-image: url(assets/images/ban2.jpg)">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 align-self-center">
-          <div class="header-text">
-            <h5>Brainscape</h5>
-            <h1>The immersive escape room experience🗝            </h1>
-            <p>Can you escape before time runs out ?🔍            </p>
-            <div class="buttons">
-              <div class="main-button">
-                <a href="https://wa.me/+96181183892" target="_blank">Book Now</a>
-              </div>
-            </div>
-          </div>
+    <!-- Rooms -->
+    <section class="rooms" id="rooms">
+        <div class="section-header">
+            <p>Select Your Challenge</p>
+            <h2>Our Escape Rooms</h2>
         </div>
-        <div class="col-lg-5 offset-lg-1 banner-sec">
-          <div class="owl-banner owl-carousel">
-            <div class="item" >
-              <img src="assets/images/banner-01.png" alt="Escape Room">
-            </div>
-            <div class="item" >
-              <img src="assets/images/banner-02.png" alt="Puzzle">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- ***** Main Banner Area End ***** -->
-  <div class="currently-market">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <div class="line-dec"></div>
-            <h2><em>Our Rooms </em> </h2>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="filters">
-            <ul>
-              <li data-filter="*"  class="active">All Locations</li>
-              <li data-filter=".zk">Zouk Mosbeh</li>
-              <!--<li data-filter=".bat">Batroun</li>-->
-              <li data-filter=".sai">Saida</li>
 
-              <li data-filter=".bei">Beirut</li>
-            </ul>
-          </div>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Locations</button>
+            <button class="filter-btn" data-filter="zouk">Zouk Mosbeh</button>
+            <button class="filter-btn" data-filter="saida">Saida</button>
+            <button class="filter-btn" data-filter="beirut">Beirut</button>
         </div>
-        <div class="col-lg-12">
-          <div class="row grid">
-            <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                <div class=" col-lg-6 col-md-12">
-                  <img src="assets/images/market-04.jpg" alt="Breaking Bad" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Breaking Bad</h4>
-                  <span class="author">
-                    Think fast in this Breaking Bad escape room.
-                    Crack cryptic codes and utilize lab equipment to escape before it's too late.
- 
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 7</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12">
-                  <img src="assets/images/market-03.jpg?" alt="Hotel" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Defuse The Bomb </h4>
-                  <span class="author">
-                   A high-risk device is active and counting down. Identify the sequence and neutralize it fast—one mistake could be catastrophic.
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 8</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-                        <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12">
-                  <img src="assets/images/haunt.jpeg?" alt="Hotel" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Abandoned Cabin </h4>
-                  <span class="author">
-Lost in the forest, your group finds an abandoned cabin with dark secrets and disappearances. Uncover the truth before you become part of the legend.</span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 10</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12 ">
-                  <img src="assets/images/market-02.jpg" alt="Casino" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Casino Heist </h4>
-                  <span class="author">
-                    Step into the world of high-stakes heists where the cards are your guide. 
-                    Navigate through a casino's secrets, crack codes, and dodge security to pull off the perfect score.
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star"  aria-hidden="true"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 6</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-              </div>
-              </div>
 
+        <div class="rooms-grid">
+            <!-- Breaking Bad -->
+            <div class="room-card" data-location="zouk">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/market-04.jpg" alt="Breaking Bad" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Zouk Mosbeh</div>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">Breaking Bad</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-7 Players</div>
+                    </div>
+                    <p class="room-desc">Think fast in this Breaking Bad escape room. Crack cryptic codes and utilize lab equipment to escape before it's too late.</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 3/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
+                </div>
             </div>
 
-
-
-            <!-- PRISON BREAK (Saida) -->
-<div class="col-lg-6 currently-market-item all sai">
-  <div class="item ">
-    <div class="row">
-      <div class=" col-lg-6 col-md-12">
-        <img src="assets/images/market-01.jpg" alt="Prison Break" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-      </div>
-      <div class=" col-lg-6 col-md-12 item-topped">
-        <h4>Prison Break </h4>
-        <span class="author">
-          Enter a maximum-security prison, where every decision is critical. Crack codes, outsmart guards, and escape confinement. 
-          <br>
-          Can you break free?
-        </span>
-        <span class="rating">
-          Difficulty level <br>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa-solid fa-star-half-stroke"></i>
-          <i class="fa-regular fa-star"></i>
-        </span>
-        <div class="line-dec"></div>
-        <span class="bid">
-          Number of Players<br><strong>2 to 10</strong><br>
-        </span>
-        <span class="ends">
-          Time <br><strong>60 minutes</strong><br>
-        </span>
-        <div class="text-button">
-          <a href="https://wa.me/+96181183892">Book Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- PSYCHO (Zouk Mosbeh) -->
-<div class="col-lg-6 currently-market-item all zk">
-  <div class="item ">
-    <div class="row">
-      <div class=" col-lg-6 col-md-12">
-        <img src="assets/images/market-08.jpg" alt="Psycho" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-      </div>
-      <div class=" col-lg-6 col-md-12 item-topped">
-        <h4>Psycho</h4>
-        <span class="author">
-          Uncover chilling clues, outsmart your sinister host, and escape this twisted dinner before time runs out!
-Navigate eerie rooms, solve cryptic puzzles, and keep your wits about you as the tension rises. 
-        </span>
-        <span class="rating">
-          Difficulty level <br>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa-regular fa-star"></i>
-        </span>
-        <div class="line-dec"></div>
-        <span class="bid">
-          Number of Players<br><strong>2 to 8</strong><br>
-        </span>
-        <span class="ends">
-          Time <br><strong>60 minutes</strong><br>
-        </span>
-        <div class="text-button">
-          <a href="https://wa.me/+96181183892">Book Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-            
-
-<!--            <div class="col-lg-6 currently-market-item all bat">-->
-<!--         <div class="item ">-->
-<!--                <div class="row">-->
-<!--                                  <div class=" col-lg-6 col-md-12">-->
-<!--                  <img src="assets/images/market-01.jpg" alt="Prison Break" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">-->
-<!--                </div>-->
-<!--                <div class=" col-lg-6 col-md-12 item-topped">-->
-<!--                  <h4>Prison Break </h4>-->
-<!--                  <span class="author">-->
-<!--                    Enter a maximum-security prison, where every decision is critical. Crack codes, outsmart guards, and escape confinement. -->
-<!--                    <br>-->
-<!--                    Can you break free?                  </span>-->
-<!--                  <span class="rating">-->
-<!--                    Difficulty level <br>-->
-<!--                  <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                  <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                  <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                  <i class="fa-solid fa-star-half-stroke"></i>-->
-<!--                  <i class="fa-regular fa-star"></i>-->
-<!--</span>-->
-<!--                  <div class="line-dec"></div>-->
-<!--                  <span class="bid">-->
-<!--                    Number of Players<br><strong>2 to 10</strong><br>-->
-<!--                  </span>-->
-<!--                  <span class="ends">-->
-<!--                    Time <br><strong>60 minutes</strong><br>-->
-<!--                  </span>-->
-<!--                  <div class="text-button">-->
-<!--                    <a href="https://wa.me/+96181183892">Book Now</a>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-                                    <div class="col-lg-6 currently-market-item all bei">
-              <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12 ">
-                  <img src="assets/images/market-07.jpg" alt="sherlock" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
+            <!-- Defuse The Bomb -->
+            <div class="room-card" data-location="zouk">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/market-03.jpg" alt="Defuse The Bomb" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Zouk Mosbeh</div>
                 </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Sherlock Holmes </h4>
-                  <span class="author">
-                    Don your deerstalker hat and step into the mind of Sherlock Holmes—decode cryptic clues, unravel twisted mysteries, and race against time in the ultimate detective challenge!
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 9</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
+                <div class="room-info">
+                    <h3 class="room-title">Defuse The Bomb</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-8 Players</div>
+                    </div>
+                    <p class="room-desc">A high-risk device is active and counting down. Identify the sequence and neutralize it fast—one mistake could be catastrophic.</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 3.5/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
                 </div>
-              </div>
-              </div>
-
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- <div class="categories-collections">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="categories">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="section-heading">
-                  <div class="line-dec"></div>
-                  <h2>Find Your Next Challenge:  <em>Our Locations</em> Here.</h2>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-01.png" alt="Beirut">
-                  </div>
-                  <h4>Beirut</h4>
-                  <div class="icon-button">
-                    <a href="https://maps.app.goo.gl/riD5wW5YxEpymKRT8"><i class="fa fa-location-dot"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-02.png" alt="Zouk">
-                  </div>
-                  <h4>Zouk Mosbeh</h4>
-                  <div class="icon-button">
-                    <a href="https://maps.app.goo.gl/bSQYwGkCbaiH8hTbA"><i class="fa fa-location-dot"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-sm-12">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-03.png" alt="Batroun">
-                  </div>
-                  <h4>Batroun</h4>
-                  <div class="icon-button">
-                    <a href="https://maps.app.goo.gl/iTwM2DbJHHKTt22j9?g_st=iw"><i class="fa fa-location-dot"></i></a>
-                  </div>
-                </div>
-              </div>
 
+            <!-- Abandoned Cabin -->
+            <div class="room-card" data-location="zouk">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/haunt.jpeg" alt="Abandoned Cabin" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Zouk Mosbeh</div>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">Abandoned Cabin</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-10 Players</div>
+                    </div>
+                    <p class="room-desc">Lost in the forest, your group finds an abandoned cabin with dark secrets and disappearances. Uncover the truth before you become part of the legend.</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 3/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        </div>
-    </div>
-  </div> -->
 
-  <div class="create-nft">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8">
-          <div class="section-heading">
-            <div class="line-dec"></div>
-            <h2>Experience and Satisfaction:            </h2>
-          </div>
+            <!-- Casino Heist -->
+            <div class="room-card" data-location="zouk">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/market-02.jpg" alt="Casino Heist" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Zouk Mosbeh</div>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">Casino Heist</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-6 Players</div>
+                    </div>
+                    <p class="room-desc">Step into the world of high-stakes heists where the cards are your guide. Navigate through a casino's secrets, crack codes, and dodge security.</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 4/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prison Break -->
+            <div class="room-card" data-location="saida">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/market-01.jpg" alt="Prison Break" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Saida</div>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">Prison Break</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-10 Players</div>
+                    </div>
+                    <p class="room-desc">Enter a maximum-security prison, where every decision is critical. Crack codes, outsmart guards, and escape confinement. Can you break free?</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 3.5/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Psycho -->
+            <div class="room-card" data-location="zouk">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/market-08.jpg" alt="Psycho" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Zouk Mosbeh</div>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">Psycho</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-8 Players</div>
+                    </div>
+                    <p class="room-desc">Uncover chilling clues, outsmart your sinister host, and escape this twisted dinner before time runs out! Navigate eerie rooms and solve cryptic puzzles.</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 4/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sherlock Holmes -->
+            <div class="room-card" data-location="beirut">
+                <div class="room-img-wrapper">
+                    <img src="assets/images/market-07.jpg" alt="Sherlock Holmes" class="room-img">
+                    <div class="room-img-overlay"></div>
+                    <div class="room-location"><i class="fas fa-map-marker-alt"></i> Beirut</div>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">Sherlock Holmes</h3>
+                    <div class="room-stats">
+                        <div class="stat"><i class="far fa-clock"></i> 60m</div>
+                        <div class="stat"><i class="fas fa-users"></i> 2-9 Players</div>
+                    </div>
+                    <p class="room-desc">Don your deerstalker hat and step into the mind of Sherlock Holmes—decode cryptic clues, unravel twisted mysteries, and race against time!</p>
+                    <div class="room-action">
+                        <div class="difficulty" title="Difficulty: 3.5/5">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+                        </div>
+                        <a href="https://wa.me/+96181183892" class="btn-outline">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="col-lg-4">
-          <div class="main-button lightbtn">
-            <a href="https://wa.me/+96181183892">Book now</a>
-          </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>+4000</h3>
+                <p>Groups Hosted</p>
+                <span>Experienced the excitement of our escape rooms.</span>
+            </div>
+            <div class="stat-item">
+                <h3>40%</h3>
+                <p>Escape Rate</p>
+                <span>Prepare to face mind-bending puzzles.</span>
+            </div>
+            <div class="stat-item">
+                <h3>+5</h3>
+                <p>Years Experience</p>
+                <span>Honing our craft to provide the ultimate adventure.</span>
+            </div>
         </div>
-        <div class="col-lg-4">
-          <div class="item first-item">
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="locations">
+        <div class="section-header">
+            <p>What People Say</p>
+            <h2>Reviews & Locations</h2>
+        </div>
+        <div class="map-wrapper">
+            <div class="reviews-list">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-author"><i class="fas fa-user-circle"></i> Parrot</div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">"I had an amazing experience at Brain Escape! From the moment we arrived, everything was well-organized and super engaging. The rooms are incredibly creative, with challenging puzzles that really make you think and work as a team."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-author"><i class="fas fa-user-circle"></i> Jo</div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">"If you haven’t been to Brainscape yet, you should definitely plan it ASAP. This is hands down the best one hour you can spend with your team, family, or partner. It pushes you to think outside the box and keeps you fully engaged."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-author"><i class="fas fa-user-circle"></i> Sabine</div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">"This place is awesome!!! I totally recommend it. The organisers are so fun and friendly yet so professional."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-author"><i class="fas fa-user-circle"></i> Antoni</div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">"It’s one of the most exciting experiences in Lebanon! Clever puzzles and fun challenges make getting the key and escaping the room an unforgettable adventure. The room’s design and materials are incredibly creative."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-author"><i class="fas fa-user-circle"></i> Mario</div>
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">"Brainscape is a top-tier escape room experience that excels in every aspect. From the immersive atmosphere to the intricate puzzles, every element worked harmoniously to provide an unforgettable adventure."</p>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/images/logo.png" alt="Brainscape">
+                <p>The premium immersive escape room experience in Lebanon. Do you have what it takes to escape?</p>
+            </div>
+            <div>
+                <h4>Locations</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/bSQYwGkCbaiH8hTbA" target="_blank"><i class="fas fa-map-marker-alt"></i> Zouk Mosbeh</a></li>
+                    <li><a href="https://maps.app.goo.gl/Wsnbr4hMBYWVDbdf8" target="_blank"><i class="fas fa-map-marker-alt"></i> Saida</a></li>
+                    <li><a href="https://maps.app.goo.gl/riD5wW5YxEpymKRT8" target="_blank"><i class="fas fa-map-marker-alt"></i> Beirut</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact Us</h4>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/+96181183892"><i class="fab fa-whatsapp"></i> +961 81 183 892</a></li>
+                    <li><a href="mailto:info@brainscape.lb"><i class="far fa-envelope"></i> info@brainscape.lb</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Brainscape. All rights reserved.</p>
+            <div class="socials">
+                <a href="https://www.instagram.com/brainscape.lb" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
         
-            <div class="icon">
-              <img src="assets/images/icon-06.png" alt="Group">
-            </div>
-            <h4>+ 4000 Groups</h4>
-            <p>Join over 4000 groups who have experienced the excitement of our escape rooms. With more than 20,000 satisfied customers, we strive to deliver memorable and exhilarating experiences for all who dare to embark on our challenges.</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="item second-item">
-     
-            <div class="icon">
-              <img src="assets/images/icon-04.png" alt="Escape">
-            </div>
-            <h4>Escape rate: 40% </h4>
-            <p>In our escape rooms, the challenge is real. With a 40% escape rate, success isn't guaranteed. Prepare to face mind-bending puzzles and thrilling scenarios. Are you up for the challenge?</p>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="item">
-            <div class="icon">
-              <img src="assets/images/icon-05.png" alt="Lebanon">
-            </div>
-            <h4>+5 years</h4>
-            <p>With over 5 years of experience and more than 8 unique rooms, we've honed our craft to provide the ultimate escape room adventure. Explore our diverse selection of rooms, each meticulously designed to challenge and thrill.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-  <!-- <div class="currently-market">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="section-heading">
-            <div class="line-dec"></div>
-            <h2><em>Our Rooms </em> </h2>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="filters">
-            <ul>
-              <li data-filter="*"  class="active">All Locations</li>
-              <li data-filter=".zk">Zouk Mosbeh</li>
-              <li data-filter=".bat">Batroun</li>
-              <li data-filter=".bei">Beirut</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div class="row grid">
-            <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                <div class=" col-lg-6 col-md-12">
-                  <img src="assets/images/market-04.jpg" alt="Breaking Bad" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Breaking Bad</h4>
-                  <span class="author">
-                    Think fast in this Breaking Bad escape room.
-                    Crack cryptic codes and utilize lab equipment to escape before it's too late.
- 
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 7</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-            <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12">
-                  <img src="assets/images/market-03.jpg" alt="Hotel" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Haunted Hotel </h4>
-                  <span class="author">
-                    Unravel the haunted mysteries, appease restless spirits, and escape before you become one! 
-                    60 minutes of spine-tingling thrills await.
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>3 to 8</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 currently-market-item all zk">
-              <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12 ">
-                  <img src="assets/images/market-02.jpg" alt="Casino" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Casino Heist </h4>
-                  <span class="author">
-                    Step into the world of high-stakes heists where the cards are your guide. 
-                    Navigate through a casino's secrets, crack codes, and dodge security to pull off the perfect score.
-                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star"  aria-hidden="true"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 6</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-              </div>
-              </div>
+        // Filtering Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const roomCards = document.querySelectorAll('.room-card');
 
-            </div>
-            <div class="col-lg-6 currently-market-item all bat">
-         <div class="item ">
-                <div class="row">
-                                  <div class=" col-lg-6 col-md-12">
-                  <img src="assets/images/market-01.jpg" alt="Prison Break" style="border-radius: 20px; min-width: 195px;width: 80%;margin-left: 10%;">
-                </div>
-                <div class=" col-lg-6 col-md-12 item-topped">
-                  <h4>Prison Break </h4>
-                  <span class="author">
-                    Enter a maximum-security prison, where every decision is critical. Crack codes, outsmart guards, and escape confinement. 
-                    <br>
-                    Can you break free?                  </span>
-                  <span class="rating">
-                    Difficulty level <br>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <i class="fa-regular fa-star"></i>
-</span>
-                  <div class="line-dec"></div>
-                  <span class="bid">
-                    Number of Players<br><strong>2 to 10</strong><br>
-                  </span>
-                  <span class="ends">
-                    Time <br><strong>60 minutes</strong><br>
-                  </span>
-                  <div class="text-button">
-                    <a href="https://wa.me/+96181183892">Book Now</a>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2025 <a href="#">Brainscape</a> All rights reserved.
-            &nbsp;&nbsp;
-            <a href="https://www.instagram.com/brainscape.lb" target="_blank">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-  
+                const filter = btn.getAttribute('data-filter');
 
+                roomCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-location') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
 
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        // Navbar blur effect on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(5, 5, 5, 0.95)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.5)';
+            } else {
+                navbar.style.background = 'rgba(5, 5, 5, 0.8)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
 
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
+        // Initialize Leaflet Map
+        const map = L.map('map').setView([33.8547, 35.5395], 9);
 
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
+        // CartoDB Dark Matter base map
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
 
-  </body>
+        const locations = [
+            { title: 'Zouk Mosbeh', lat: 33.9576, lng: 35.6148, img: 'assets/images/market-04.jpg', link: 'https://maps.app.goo.gl/bSQYwGkCbaiH8hTbA' },
+            { title: 'Saida', lat: 33.5631, lng: 35.3725, img: 'assets/images/market-01.jpg', link: 'https://maps.app.goo.gl/Wsnbr4hMBYWVDbdf8' },
+            { title: 'Beirut', lat: 33.8938, lng: 35.5018, img: 'assets/images/market-07.jpg', link: 'https://maps.app.goo.gl/riD5wW5YxEpymKRT8' }
+        ];
+
+        locations.forEach(loc => {
+            const customIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style='width:80px;height:80px;border-radius:50%;border:3px solid #e50914;background:url(${loc.img}) center/cover;box-shadow:0 0 20px rgba(229,9,20,0.8); position:relative; cursor:pointer;'>
+                           <div style='position:absolute; bottom:-12px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:10px solid transparent; border-right:10px solid transparent; border-top:14px solid #e50914;'></div>
+                       </div>`,
+                iconSize: [80, 94],
+                iconAnchor: [40, 94]
+            });
+
+            L.marker([loc.lat, loc.lng], {icon: customIcon})
+                .addTo(map)
+                .on('click', () => {
+                    window.open(loc.link, '_blank');
+                });
+        });
+    </script>
+</body>
 </html>
